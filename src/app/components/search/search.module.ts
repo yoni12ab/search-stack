@@ -5,8 +5,9 @@ import { SearchInputComponent } from "./search-input/search-input.component";
 import { SearchResultsComponent } from "./search-results/search-results.component";
 import { SearchService } from "./search.service";
 import { SearchApiService } from "./search-api.service";
-import { SharedModule } from "@shared/shared.module";
+
 import { SearchState } from "./search.state";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [CommonModule, SharedModule],
