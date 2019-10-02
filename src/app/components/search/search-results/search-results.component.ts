@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { SearchService } from "../search.service";
-import { SearchRes } from "../search-models";
+import { SearchRes, SearchItem } from "../search-models";
 import { Subject } from "rxjs";
 
 @Component({
@@ -9,14 +9,18 @@ import { Subject } from "rxjs";
   styleUrls: ["./search-results.component.css"]
 })
 export class SearchResultsComponent implements OnInit {
-  public searchResults$: Subject<SearchRes>;
-  constructor(private searchService: SearchService) {}
+  @Input() public searchResults$: Subject<SearchRes>;
+  @Output() nextPage = new EventEmitter<void>();
+  @Output() itemSelected = new EventEmitter<SearchItem>();
+  constructor() {}
 
-  ngOnInit() {
-    this.searchResults$ = this.searchService.getResults();
+  ngOnInit() {}
+
+  public click(): void {
+    this.nextPage.emit();
   }
 
-  public nextPage(): void {
-    this.searchService.setNextPage();
+  public selectItem(item: SearchItem): void {
+    this.itemSelected.emit(item);
   }
 }

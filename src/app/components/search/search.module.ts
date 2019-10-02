@@ -8,10 +8,11 @@ import { SearchApiService } from "./search-api.service";
 
 import { SearchState } from "./search.state";
 import { SharedModule } from "../../shared/shared.module";
+import { SearchSelectedComponent } from './search-selected/search-selected.component';
 
 @NgModule({
   imports: [CommonModule, SharedModule],
-  declarations: [SearchComponent, SearchInputComponent, SearchResultsComponent],
+  declarations: [SearchComponent, SearchInputComponent, SearchResultsComponent, SearchSelectedComponent],
   exports: [SearchComponent],
   providers: [SearchService, SearchApiService, SearchState]
 })

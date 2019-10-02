@@ -1,0 +1,5 @@
+<div *ngIf="selectedItem$ | async as selected">
+  <div>View count {{ selected?.view_count }}</div>
+  <div>Score {{ selected?.score }}</div>
+  <div>Link {{ selected?.link }}</div>
+</div>

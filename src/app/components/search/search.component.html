@@ -7,9 +7,19 @@
       fxLayout="column"
       fxLayoutAlign="start stretch"
     >
-      <app-search-input></app-search-input>
-      <app-search-results></app-search-results>
+      <app-search-input
+        (searchChange)="searchChange($event)"
+      ></app-search-input>
+      <app-search-results
+        [searchResults$]="searchResults$"
+        (nextPage)="nextPage()"
+        (itemSelected)="itemSelected($event)"
+      ></app-search-results>
     </div>
-    <div></div>
+    <div>
+      <app-search-selected
+        [selectedItem$]="selectedItem$"
+      ></app-search-selected>
+    </div>
   </div>
 </div>
