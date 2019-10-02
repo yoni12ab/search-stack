@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { SearchService } from "../search.service";
 import { SearchRes, SearchItem } from "../search-models";
-import { Subject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
+import { IPageInfo } from "ngx-virtual-scroller";
 
 @Component({
   selector: "app-search-results",
@@ -9,14 +10,16 @@ import { Subject } from "rxjs";
   styleUrls: ["./search-results.component.css"]
 })
 export class SearchResultsComponent implements OnInit {
-  @Input() public searchResults$: Subject<SearchRes>;
+  @Input() public searchResults$: BehaviorSubject<SearchRes>;
   @Output() nextPage = new EventEmitter<void>();
   @Output() itemSelected = new EventEmitter<SearchItem>();
   constructor() {}
 
   ngOnInit() {}
 
-  public click(): void {
+  protected fetchMore(event: IPageInfo) {
+    const res = this.searchResults$.getValue();
+    if (res && event.endIndex !== res.items.length - 1) return;
     this.nextPage.emit();
   }
 

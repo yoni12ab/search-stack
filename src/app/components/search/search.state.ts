@@ -48,7 +48,7 @@ export class SearchState {
     this.searchResults$.next(value);
   }
 
-  public getResults(): Subject<SearchRes> {
+  public getResults(): BehaviorSubject<SearchRes> {
     return this.searchResults$;
   }
 

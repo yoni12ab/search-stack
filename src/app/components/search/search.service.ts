@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { SearchApiService } from "./search-api.service";
-import { Subject, of, combineLatest } from "rxjs";
+import { Subject, of, combineLatest, BehaviorSubject } from "rxjs";
 import {
   debounceTime,
   distinctUntilChanged,
@@ -31,7 +31,7 @@ export class SearchService {
     this.searchState.setTerm(term);
   }
 
-  public getResults(): Subject<SearchRes> {
+  public getResults(): BehaviorSubject<SearchRes> {
     return this.searchState.getResults();
   }
 
@@ -53,7 +53,6 @@ export class SearchService {
         debounceTime(500),
         distinctUntilChanged(),
         switchMap(([term, page = 1]) => {
-          console.log(term);
           return !term ? of(null) : this.searchApiService.search(term, page);
         }),
         map(res => this.searchState.appendResults(res))

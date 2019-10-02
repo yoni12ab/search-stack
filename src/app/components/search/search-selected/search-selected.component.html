@@ -1,5 +1,19 @@
-<div *ngIf="selectedItem$ | async as selected">
-  <div>View count {{ selected?.view_count }}</div>
-  <div>Score {{ selected?.score }}</div>
-  <div>Link {{ selected?.link }}</div>
-</div>
+<mat-card *ngIf="selectedItem$ | async as selected" class="example-card">
+  <mat-card-header>
+    <div
+      *ngIf="selected?.owner?.profile_image"
+      mat-card-avatar
+      class="example-header-image"
+      [style.backgroundImage]="'url(' + selected?.owner?.profile_image + ')'"
+    ></div>
+    <mat-card-title>{{ selected?.owner?.display_name }}</mat-card-title>
+    <mat-card-subtitle>{{ selected?.owner?.user_type }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-card-title>Title {{ selected?.title }}</mat-card-title>
+    <div>View count {{ selected?.view_count }}</div>
+    <div>Score {{ selected?.score }}</div>
+    <div>Link {{ selected?.link }}</div>
+  </mat-card-content>
+</mat-card>
