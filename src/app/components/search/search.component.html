@@ -1,6 +1,15 @@
-<div>
-  <app-search-input></app-search-input>
-  <div>
-    <app-search-results></app-search-results>
+<app-header></app-header>
+<div class="search-page">
+  <div fxLayout="row" fxLayoutAlign="start start" fxFlexFill>
+    <div
+      class="search-list-container"
+      fxFlex="40"
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+    >
+      <app-search-input></app-search-input>
+      <app-search-results></app-search-results>
+    </div>
+    <div></div>
   </div>
 </div>

@@ -1,0 +1,8 @@
+.search-page {
+    padding: 0 20px;
+}
+
+.search-list-container {
+    border-right: 1px solid gray;
+    height: 100%;
+}

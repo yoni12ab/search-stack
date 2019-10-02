@@ -1,4 +1,10 @@
-<div>
-
-<input type="text" (keyup)="keyDown($event.target.value)" />
+<div class="search-input-container">
+  <mat-form-field>
+    <input
+      autocomplete="off"
+      matInput
+      placeholder="Search StackOverflow"
+      (keyup)="keyDown($event.target.value)"
+    />
+  </mat-form-field>
 </div>

@@ -1,61 +1,46 @@
 import { Injectable } from "@angular/core";
 import { SearchApiService } from "./search-api.service";
-import { Subject, of, BehaviorSubject, combineLatest } from "rxjs";
+import { Subject, of, combineLatest } from "rxjs";
 import {
   debounceTime,
   distinctUntilChanged,
   switchMap,
   map
 } from "rxjs/operators";
+import { SearchRes, SearchItem } from "./search-models";
+import { SearchState } from "./search.state";
 
 @Injectable()
 export class SearchService {
-  private searchResults$ = new BehaviorSubject<any>([]);
-  private term$ = new BehaviorSubject<string>("");
-  private page$ = new BehaviorSubject<number>(1);
-
-  constructor(private searchApiService: SearchApiService) {
+  constructor(
+    private searchApiService: SearchApiService,
+    private searchState: SearchState
+  ) {
     this.init();
   }
 
-  public setTerm(term: string): void {
-    this.setPage(1);
-    this.setResults([]);
-    this.term$.next(term);
+  public setSelectedItem(item: SearchItem): void {
+    this.searchState.setSelectedItem(item);
   }
 
-  public nextPage(): number {
-    const nextPage = this.page$.getValue() + 1;
-    this.setPage(nextPage);
-    return nextPage;
+  public getSelectedItem(): Subject<SearchItem> {
+    return this.searchState.getSelectedItem();
+  }
+
+  public setTerm(term: string): void {
+    this.searchState.setTerm(term);
+  }
+
+  public getResults(): Subject<SearchRes> {
+    return this.searchState.getResults();
+  }
+
+  public setNextPage(): number {
+    return this.searchState.setNextPage();
   }
 
   public clear(): void {
-    this.setTerm("");
-    this.setPage(1);
-    this.setResults([]);
-  }
-
-  public getResults(): Subject<any> {
-    return this.searchResults$;
-  }
-
-  private setPage(page = 1): void {
-    this.page$.next(page);
-  }
-
-  private setResults(res: any): void {
-    this.searchResults$.next(res);
-  }
-
-  private appendResults(res: any): void {
-    let value = this.searchResults$.getValue();
-    if (value && value.items) {
-      value.items.push(...res.items);
-    } else {
-      value = res;
-    }
-    this.searchResults$.next(value);
+    this.searchState.clear();
   }
 
   private init() {
@@ -63,15 +48,15 @@ export class SearchService {
   }
 
   private subscribeToTermChangeOnce(): void {
-    combineLatest(this.term$, this.page$)
+    combineLatest(this.searchState.getTerm(), this.searchState.getPage())
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
         switchMap(([term, page = 1]) => {
           console.log(term);
-          return !term ? of([]) : this.searchApiService.search(term, page);
+          return !term ? of(null) : this.searchApiService.search(term, page);
         }),
-        map(res => this.appendResults(res))
+        map(res => this.searchState.appendResults(res))
       )
       .subscribe();
   }
