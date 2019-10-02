@@ -1,0 +1,5 @@
+<button (click)="nextPage()"> Next </button> 
+<div *ngFor="let item of (searchResults$ | async )?.items">
+  title : {{item.title}}
+
+</div>
