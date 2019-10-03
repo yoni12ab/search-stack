@@ -21,6 +21,7 @@ export class SearchResultsComponent implements OnInit {
   @Input() public searchResults$: BehaviorSubject<SearchRes>;
   @Output() nextPage = new EventEmitter<void>();
   @Output() itemSelected = new EventEmitter<SearchItem>();
+  @Input() selectedItem$: SearchItem;
   constructor() {}
 
   ngOnInit() {}

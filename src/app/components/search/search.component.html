@@ -1,12 +1,15 @@
 <app-header></app-header>
 <div class="search-page">
   <app-search-input (searchChange)="searchChange($event)"></app-search-input>
+
   <div class="progress-bar-container">
     <mat-progress-bar
       *ngIf="searchLoader$ | async"
       mode="query"
     ></mat-progress-bar>
   </div>
+
+  <!------search results xs screens------->
   <div fxHide fxShow.xs="true" class="search-results-container">
     <app-search-results-expandable
       [searchResults$]="searchResults$"
@@ -14,30 +17,14 @@
     >
     </app-search-results-expandable>
   </div>
-  <div
-    fxShow
-    fxHide.xs="true"
-    fxLayout="row"
-    class="search-results-container"
-    fxLayoutAlign="start start"
-    fxFlexFill
-  >
-    <div
-      class="search-list-container"
-      fxFlex="40"
-      fxLayout="column"
-      fxLayoutAlign="start stretch"
-    >
-      <app-search-results
-        [searchResults$]="searchResults$"
-        (nextPage)="nextPage()"
-        (itemSelected)="itemSelected($event)"
-      ></app-search-results>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="center center">
-      <app-search-selected
-        [selectedItem$]="selectedItem$"
-      ></app-search-selected>
-    </div>
+
+  <!------search results not xs screens------->
+  <div fxShow fxHide.xs="true" class="search-results-container">
+    <app-search-results
+      [searchResults$]="searchResults$"
+      (nextPage)="nextPage()"
+      (itemSelected)="itemSelected($event)"
+      [selectedItem$]="selectedItem$"
+    ></app-search-results>
   </div>
 </div>
