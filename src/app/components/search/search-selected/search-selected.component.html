@@ -11,9 +11,18 @@
   </mat-card-header>
 
   <mat-card-content>
-    <mat-card-title>Title {{ selected?.title }}</mat-card-title>
-    <div>View count {{ selected?.view_count }}</div>
-    <div>Score {{ selected?.score }}</div>
-    <div>Link {{ selected?.link }}</div>
+    <mat-card-title>{{ selected?.title }}</mat-card-title>
+    <div>
+      <span class="card-title">View count: </span> {{ selected?.view_count }}
+    </div>
+    <div><span class="card-title">Score: </span> {{ selected?.score }}</div>
+    <div>
+      <span class="card-title">Link: </span>
+      <a target="_blank" [href]="selected?.link">go</a>
+    </div>
+    <div>
+      <span class="card-title">Tags: </span>
+      {{ selected?.tags.join(",") }}
+    </div>
   </mat-card-content>
 </mat-card>

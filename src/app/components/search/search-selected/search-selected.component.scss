@@ -1,8 +1,12 @@
 .example-card {
-    max-width: 400px;
-    height: 40vh;
+  max-width: 400px;
+  height: 40vh;
+  box-shadow: none;
 }
 
 .example-header-image {
-    background-size: cover;
+  background-size: cover;
+}
+.card-title {
+  // font-weight: bold;
 }

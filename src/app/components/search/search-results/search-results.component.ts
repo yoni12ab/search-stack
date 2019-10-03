@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { SearchService } from "../search.service";
 import { SearchRes, SearchItem } from "../search-models";
 import { BehaviorSubject } from "rxjs";
@@ -7,7 +14,8 @@ import { IPageInfo } from "ngx-virtual-scroller";
 @Component({
   selector: "app-search-results",
   templateUrl: "./search-results.component.html",
-  styleUrls: ["./search-results.component.scss"]
+  styleUrls: ["./search-results.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchResultsComponent implements OnInit {
   @Input() public searchResults$: BehaviorSubject<SearchRes>;

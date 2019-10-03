@@ -1,20 +1,23 @@
 <div *ngIf="searchResults$ | async as results">
-  <mat-nav-list>
-    <virtual-scroller
-      #scroll
-      [items]="results?.items"
-      (vsEnd)="fetchMore($event)"
-    >
-      <a
-        mat-list-item
-        *ngFor="let item of scroll?.viewPortItems"
-        class="virtual-item"
-        (click)="selectItem(item)"
+  <ng-container [ngSwitch]="results?.items">
+    <div *ngSwitchCase="null"></div>
+    <mat-nav-list *ngSwitchDefault>
+      <virtual-scroller
+        #scroll
+        [items]="results?.items"
+        (vsEnd)="fetchMore($event)"
       >
-        <h4 mat-line>{{ item.title }}</h4>
-        <p mat-line>{{ item.last_activity_date * 1000 | date }}</p>
-      </a>
-      <mat-divider></mat-divider>
-    </virtual-scroller>
-  </mat-nav-list>
+        <a
+          mat-list-item
+          *ngFor="let item of scroll?.viewPortItems"
+          class="virtual-item"
+          (click)="selectItem(item)"
+        >
+          <h4 mat-line>{{ item.title }}</h4>
+          <p mat-line>{{ item.last_activity_date * 1000 | date }}</p>
+        </a>
+        <mat-divider></mat-divider>
+      </virtual-scroller>
+    </mat-nav-list>
+  </ng-container>
 </div>
