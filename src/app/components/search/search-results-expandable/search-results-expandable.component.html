@@ -1,0 +1,20 @@
+<div *ngIf="searchResults$ | async as results">
+  <mat-accordion>
+    <virtual-scroller
+      #scroll
+      [items]="results?.items"
+      (vsEnd)="fetchMore($event)"
+    >
+      <mat-expansion-panel
+        *ngFor="let item of scroll?.viewPortItems"
+        class="virtual-item"
+      >
+        <mat-expansion-panel-header>
+          {{ item.title }}
+        </mat-expansion-panel-header>
+
+        <app-search-selected [selectedItem$]="rxOf(item)"></app-search-selected>
+      </mat-expansion-panel>
+    </virtual-scroller>
+  </mat-accordion>
+</div>

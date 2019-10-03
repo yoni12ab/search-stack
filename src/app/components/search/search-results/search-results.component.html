@@ -1,6 +1,6 @@
 <div *ngIf="searchResults$ | async as results">
   <ng-container [ngSwitch]="results?.items">
-    <div *ngSwitchCase="null"></div>
+    <div *ngSwitchCase="null">No found</div>
     <mat-nav-list *ngSwitchDefault>
       <virtual-scroller
         #scroll

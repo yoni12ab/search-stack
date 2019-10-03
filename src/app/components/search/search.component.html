@@ -7,7 +7,16 @@
       mode="query"
     ></mat-progress-bar>
   </div>
+  <div fxHide fxShow.xs="true" class="search-results-container">
+    <app-search-results-expandable
+      [searchResults$]="searchResults$"
+      (nextPage)="nextPage()"
+    >
+    </app-search-results-expandable>
+  </div>
   <div
+    fxShow
+    fxHide.xs="true"
     fxLayout="row"
     class="search-results-container"
     fxLayoutAlign="start start"
