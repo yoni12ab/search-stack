@@ -3,7 +3,14 @@ import { CommonModule } from "@angular/common";
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatCardModule } from "@angular/material/card";
-const importsExportsModules = [MatInputModule, MatListModule, MatCardModule];
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+
+const importsExportsModules = [
+  MatInputModule,
+  MatListModule,
+  MatCardModule,
+  MatProgressBarModule
+];
 
 @NgModule({
   declarations: [],

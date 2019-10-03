@@ -1,9 +1,14 @@
+@import "../../shared/shared-variables";
 .search-page {
-    padding: 0 20px;
-    height: 100%;
-}
-
-.search-list-container {
-    border-right: 1px solid gray;
-    height: 100%;
+  height: 100%;
+  .progress-bar-container {
+    height: 5px;
+  }
+  .search-results-container {
+    border-top: 1px solid $app-light-gray;
+    .search-list-container {
+      border-right: 1px solid $app-light-gray;
+      height: 100%;
+    }
+  }
 }

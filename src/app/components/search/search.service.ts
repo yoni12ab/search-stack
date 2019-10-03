@@ -5,7 +5,9 @@ import {
   debounceTime,
   distinctUntilChanged,
   switchMap,
-  map
+  map,
+  tap,
+  finalize
 } from "rxjs/operators";
 import { SearchRes, SearchItem } from "./search-models";
 import { SearchState } from "./search.state";
@@ -27,6 +29,13 @@ export class SearchService {
     return this.searchState.getSelectedItem();
   }
 
+  public getLoader(): BehaviorSubject<boolean> {
+    return this.searchState.getLoader();
+  }
+
+  public setLoader(value: boolean): void {
+    this.searchState.setLoader(value);
+  }
   public setTerm(term: string): void {
     this.searchState.setTerm(term);
   }
@@ -52,10 +61,12 @@ export class SearchService {
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
+        tap(val => this.setLoader(true)),
         switchMap(([term, page = 1]) => {
           return !term ? of(null) : this.searchApiService.search(term, page);
         }),
-        map(res => this.searchState.appendResults(res))
+        tap(res => this.searchState.appendResults(res)),
+        map(() => this.setLoader(false))
       )
       .subscribe();
   }

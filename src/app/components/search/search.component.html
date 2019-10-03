@@ -1,15 +1,24 @@
 <app-header></app-header>
 <div class="search-page">
-  <div fxLayout="row" fxLayoutAlign="start start" fxFlexFill>
+  <app-search-input (searchChange)="searchChange($event)"></app-search-input>
+  <div class="progress-bar-container">
+    <mat-progress-bar
+      *ngIf="searchLoader$ | async"
+      mode="query"
+    ></mat-progress-bar>
+  </div>
+  <div
+    fxLayout="row"
+    class="search-results-container"
+    fxLayoutAlign="start start"
+    fxFlexFill
+  >
     <div
       class="search-list-container"
       fxFlex="40"
       fxLayout="column"
       fxLayoutAlign="start stretch"
     >
-      <app-search-input
-        (searchChange)="searchChange($event)"
-      ></app-search-input>
       <app-search-results
         [searchResults$]="searchResults$"
         (nextPage)="nextPage()"
