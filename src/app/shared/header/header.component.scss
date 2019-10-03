@@ -1,8 +1,11 @@
 @import '../../shared/shared-variables';
 
 .app-header-container {
-    background-color:$app-deep-blue;
+    background-color: $app-deep-blue;
     color: #FFF;
     padding: 10px;
     text-indent: 20px;
+    height: 10vh;
+    display: flex;
+    align-items: center;
 }

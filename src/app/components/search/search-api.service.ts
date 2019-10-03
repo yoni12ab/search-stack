@@ -6,7 +6,7 @@ import { SearchRes } from "./search-models";
 
 @Injectable()
 export class SearchApiService {
-  private readonly PAGE_SIZE = 5;
+  private readonly PAGE_SIZE = 12;
 
   constructor(private http: HttpClient) {}
 

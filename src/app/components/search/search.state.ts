@@ -22,7 +22,6 @@ export class SearchState {
   }
 
   public setLoader(value: boolean): void {
-    console.log(value);
     this.loader$.next(value);
   }
 
