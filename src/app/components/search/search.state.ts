@@ -8,20 +8,11 @@ export class SearchState {
   private term$ = new BehaviorSubject<string>("");
   private page$ = new BehaviorSubject<number>(1);
   private selectedItem$ = new Subject<SearchItem>();
-  private loader$ = new BehaviorSubject<boolean>(false);
   private notFound$ = new BehaviorSubject<boolean>(false);
 
   public setTerm(term: string): void {
     this.resetBeforeNewTerm();
     this.term$.next(term);
-  }
-
-  public getLoader(): BehaviorSubject<boolean> {
-    return this.loader$;
-  }
-
-  public setLoader(value: boolean): void {
-    this.loader$.next(value);
   }
 
   public getNotFound(): BehaviorSubject<boolean> {

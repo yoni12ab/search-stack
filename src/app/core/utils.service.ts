@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, fromEvent, of } from "rxjs";
+import { Observable, fromEvent, of, BehaviorSubject } from "rxjs";
 import { startWith, throttleTime, map } from "rxjs/operators";
 
 @Injectable({
@@ -7,9 +7,18 @@ import { startWith, throttleTime, map } from "rxjs/operators";
 })
 export class UtilsService {
   private isScreenSmall$;
+  private loader$ = new BehaviorSubject<boolean>(false);
 
   constructor() {
     this.init();
+  }
+
+  public getLoader(): BehaviorSubject<boolean> {
+    return this.loader$;
+  }
+
+  public setLoader(value: boolean): void {
+    this.loader$.next(value);
   }
 
   public getIsSmallScreen(): Observable<boolean> {

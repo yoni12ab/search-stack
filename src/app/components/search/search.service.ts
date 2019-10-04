@@ -22,6 +22,7 @@ import { SearchState } from "./search.state";
 import { HttpErrorResponse } from "@angular/common/http";
 import { NotificationService } from "../../core/notification.service";
 import { LoggingService } from "../../core/logging.service";
+import { UtilsService } from "../../core/utils.service";
 
 @Injectable()
 export class SearchService {
@@ -29,6 +30,7 @@ export class SearchService {
     private searchApiService: SearchApiService,
     private searchState: SearchState,
     private notificationService: NotificationService,
+    private utilsService: UtilsService,
     private loggingService: LoggingService
   ) {
     this.init();
@@ -43,7 +45,7 @@ export class SearchService {
   }
 
   public getLoader(): BehaviorSubject<boolean> {
-    return this.searchState.getLoader();
+    return this.utilsService.getLoader();
   }
 
   public getNotFound(): BehaviorSubject<boolean> {
@@ -51,7 +53,7 @@ export class SearchService {
   }
 
   public setLoader(value: boolean): void {
-    this.searchState.setLoader(value);
+    this.utilsService.setLoader(value);
   }
   public setTerm(term: string): void {
     this.searchState.setTerm(term);
