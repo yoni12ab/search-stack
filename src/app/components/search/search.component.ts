@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SearchRes, SearchItem } from "./search-models";
-import { Subject, BehaviorSubject } from "rxjs";
+import { Subject, BehaviorSubject, Observable } from "rxjs";
 import { SearchService } from "./search.service";
+import { UtilsService } from "src/app/core/utils.service";
 
 @Component({
   selector: "app-search",
@@ -12,12 +13,20 @@ export class SearchComponent implements OnInit, OnDestroy {
   public searchResults$: Subject<SearchRes>;
   public selectedItem$: Subject<SearchItem>;
   public searchLoader$: BehaviorSubject<boolean>;
-  constructor(private searchService: SearchService) {}
+  public isScreenSmall$: Observable<boolean>;
+  public notFound$: Observable<boolean>;
+
+  constructor(
+    private searchService: SearchService,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit() {
     this.searchResults$ = this.searchService.getResults();
     this.selectedItem$ = this.searchService.getSelectedItem();
     this.searchLoader$ = this.searchService.getLoader();
+    this.notFound$ = this.searchService.getNotFound();
+    this.isScreenSmall$ = this.utilsService.getIsSmallScreen();
   }
 
   public nextPage(): void {

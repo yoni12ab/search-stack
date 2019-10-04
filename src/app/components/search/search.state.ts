@@ -9,11 +9,10 @@ export class SearchState {
   private page$ = new BehaviorSubject<number>(1);
   private selectedItem$ = new Subject<SearchItem>();
   private loader$ = new BehaviorSubject<boolean>(false);
+  private notFound$ = new BehaviorSubject<boolean>(false);
 
   public setTerm(term: string): void {
-    this.setSelectedItem(null);
-    this.setPage(1);
-    this.setResults(null);
+    this.resetBeforeNewTerm();
     this.term$.next(term);
   }
 
@@ -23,6 +22,14 @@ export class SearchState {
 
   public setLoader(value: boolean): void {
     this.loader$.next(value);
+  }
+
+  public getNotFound(): BehaviorSubject<boolean> {
+    return this.notFound$;
+  }
+
+  public setNotFound(value: boolean): void {
+    this.notFound$.next(value);
   }
 
   public getSelectedItem(): Subject<SearchItem> {
@@ -60,6 +67,13 @@ export class SearchState {
 
   public getResults(): BehaviorSubject<SearchRes> {
     return this.searchResults$;
+  }
+
+  public resetBeforeNewTerm() {
+    this.setNotFound(false);
+    this.setSelectedItem(null);
+    this.setPage(1);
+    this.setResults(null);
   }
 
   public clear() {

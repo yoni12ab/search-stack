@@ -9,22 +9,31 @@
     ></mat-progress-bar>
   </div>
 
-  <!------search results xs screens------->
-  <div fxHide fxShow.xs="true" class="search-results-container">
-    <app-search-results-expandable
-      [searchResults$]="searchResults$"
-      (nextPage)="nextPage()"
-    >
-    </app-search-results-expandable>
-  </div>
+  <ng-template [ngIf]="notFound$ | async" [ngIfElse]="foundSomeResults">
+    <div class="not-found search-results-container">
+      <h3>We're Sorry!</h3>
+      We can't seem to find any questions that match your search
+    </div>
+  </ng-template>
 
-  <!------search results not xs screens------->
-  <div fxShow fxHide.xs="true" class="search-results-container">
-    <app-search-results
-      [searchResults$]="searchResults$"
-      (nextPage)="nextPage()"
-      (itemSelected)="itemSelected($event)"
-      [selectedItem$]="selectedItem$"
-    ></app-search-results>
-  </div>
+  <ng-template #foundSomeResults>
+    <!------search results xs screens------->
+    <div *ngIf="isScreenSmall$ | async" class="search-results-container">
+      <app-search-results-expandable
+        [searchResults$]="searchResults$"
+        (nextPage)="nextPage()"
+      >
+      </app-search-results-expandable>
+    </div>
+
+    <!------search results not xs screens------->
+    <div *ngIf="!(isScreenSmall$ | async)" class="search-results-container">
+      <app-search-results
+        [searchResults$]="searchResults$"
+        (nextPage)="nextPage()"
+        (itemSelected)="itemSelected($event)"
+        [selectedItem$]="selectedItem$"
+      ></app-search-results>
+    </div>
+  </ng-template>
 </div>

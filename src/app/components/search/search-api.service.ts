@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { map, delay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { SearchRes } from "./search-models";
 

@@ -13,8 +13,8 @@ export interface SearchItem {
   owner: Owner;
   is_answered: boolean;
   view_count: number;
-  protected_date: number;
-  accepted_answer_id: number;
+  protected_date?: number;
+  accepted_answer_id?: number;
   answer_count: number;
   score: number;
   last_activity_date: number;

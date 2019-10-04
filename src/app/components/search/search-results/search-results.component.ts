@@ -28,7 +28,12 @@ export class SearchResultsComponent implements OnInit {
 
   protected fetchMore(event: IPageInfo) {
     const res = this.searchResults$.getValue();
-    if (res && event.endIndex !== res.items.length - 1) return;
+    if (
+      (res && event.endIndex !== res.items.length - 1) ||
+      (res && !res.items.length)
+    ) {
+      return;
+    }
     this.nextPage.emit();
   }
 

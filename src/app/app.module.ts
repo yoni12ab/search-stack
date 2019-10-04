@@ -7,7 +7,7 @@ import { SearchModule } from "./components/search/search.module";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
-
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 @NgModule({
   imports: [
     BrowserModule,
@@ -15,7 +15,8 @@ import { AppRoutingModule } from "./app-routing.module";
     SearchModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSnackBarModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
