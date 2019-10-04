@@ -20,8 +20,8 @@ import {
 import { SearchRes, SearchItem } from "./search-models";
 import { SearchState } from "./search.state";
 import { HttpErrorResponse } from "@angular/common/http";
-import { NotificationService } from "src/app/core/notification.service";
-import { LoggingService } from "src/app/core/logging.service";
+import { NotificationService } from "../../core/notification.service";
+import { LoggingService } from "../../core/logging.service";
 
 @Injectable()
 export class SearchService {

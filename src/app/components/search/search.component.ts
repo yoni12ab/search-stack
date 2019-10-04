@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SearchRes, SearchItem } from "./search-models";
 import { Subject, BehaviorSubject, Observable } from "rxjs";
 import { SearchService } from "./search.service";
-import { UtilsService } from "src/app/core/utils.service";
+import { UtilsService } from "../../core/utils.service";
 
 @Component({
   selector: "app-search",
