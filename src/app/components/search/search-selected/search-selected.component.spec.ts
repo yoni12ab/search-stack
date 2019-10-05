@@ -1,16 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SearchSelectedComponent } from './search-selected.component';
+import { SearchSelectedComponent } from "./search-selected.component";
+import { SharedModule } from "../../../shared/shared.module";
+import { SearchModule } from "../search.module";
 
-describe('SearchSelectedComponent', () => {
+describe("SearchSelectedComponent", () => {
   let component: SearchSelectedComponent;
   let fixture: ComponentFixture<SearchSelectedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchSelectedComponent ]
-    })
-    .compileComponents();
+      imports: [SearchModule, SharedModule],
+      declarations: []
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('SearchSelectedComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

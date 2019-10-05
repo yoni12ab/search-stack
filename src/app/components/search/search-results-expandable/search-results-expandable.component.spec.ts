@@ -10,7 +10,7 @@ describe("SearchResultsExpandableComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [SearchModule],
+      imports: [SearchModule, SharedModule],
       declarations: []
     }).compileComponents();
   }));
