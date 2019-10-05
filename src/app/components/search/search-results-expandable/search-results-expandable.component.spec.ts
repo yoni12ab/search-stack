@@ -1,16 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SearchResultsExpandableComponent } from './search-results-expandable.component';
+import { SearchResultsExpandableComponent } from "./search-results-expandable.component";
+import { SharedModule } from "../../../shared/shared.module";
+import { SearchModule } from "../search.module";
 
-describe('SearchResultsExpandableComponent', () => {
+describe("SearchResultsExpandableComponent", () => {
   let component: SearchResultsExpandableComponent;
   let fixture: ComponentFixture<SearchResultsExpandableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchResultsExpandableComponent ]
-    })
-    .compileComponents();
+      imports: [SearchModule],
+      declarations: []
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('SearchResultsExpandableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
